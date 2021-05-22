@@ -15,11 +15,9 @@
             <div style="text-align: center; padding-left: 50px;">            
                 <h3>Dividas Report</h5>
                 <table>
-                <% if (dividas.length > 0) { %>
                     <% dividas.forEach(divida => {%>
-                       <tr><td><%= divida.nome %></td><td><%= student.valor %></td></tr>
+                       <tr><td><%= divida.nome %></td><td><%= divida.valor %></td></tr>
                     <%  });%>
-                <% }%>
                 </table>
              </div>
         </div>
