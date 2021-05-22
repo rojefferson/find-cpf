@@ -11,9 +11,11 @@
         </style>
     </head>
     <body>
+        <div id="header"> 
+            <h2>Annual Report of our Company</h2> 
+       </div>
         <div style="width: 85%; margin: 0 7.5%;">
             <div style="text-align: center; padding-left: 50px;">            
-                <h3>Dividas Report</h5>
                 <table>
                     <% dividas.forEach(divida => {%>
                        <tr><td><%= divida.nome %></td><td><%= divida.valor %></td></tr>
