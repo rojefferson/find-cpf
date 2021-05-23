@@ -2,52 +2,92 @@
 <html>
     <head>
         <style>
+        #customers {
+          font-family: Arial, Helvetica, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+        
+        #customers td, #customers th {
+          border: 1px solid #ddd;
+          padding: 8px;
+        }
+        
+        #customers tr:nth-child(even){background-color: #f2f2f2;}
+        
+        #customers tr:hover {background-color: #ddd;}
+        
+        #customers th {
+          padding-top: 12px;
+          padding-bottom: 12px;
+          text-align: left;
+          background-color: #1e41db;
+          color: white;
+        }
+        .leftAling {
+           text-align: left;
+        }
         table {
             border-collapse: collapse;
         }
         table, th, td {
-            border: 1px solid black;
+            border: 1px solitdd black;
         }
         </style>
     </head>
     <body>
         <div id="header"> 
-            <h2>Annual Report of our Company</h2> 
+            <h2>Dividas</h2> 
        </div>
         <div style="width: 100%;">
             <div style="text-align: center;">
-                <table border = "1">
+                <table border = "1" id="customers">
                     <tr>
-                       <th></th>
-                       <th>Column 2</th>
-                       <th>Column 3</th>
+                       <th colspan ="3" > Dados </th>
                     </tr>
                     <tr>
                        <td rowspan = "8">Dados do Cliente</td>
-                       <td>Nome</td>
-                       <td>2123123</td>
+                       <td style="text-align: left;" >Nome</td>
+                       <td><%= infoPessoais.nome %></td>
                       
                     </tr>
                     <tr>
-                       <td>Cpf</td>
-                       <td>Row 2 Cell 3</td>
+                       <td style="text-align: left;" >CPF</td>
+                       <td><%= infoPessoais.CPF %></td>
                     </tr>
               			<tr>
-                       <td>Nome da  Mãe</td>
-                       <td>Row 2 Cell 3</td>
+                       <td style="text-align: left;" >Nome da  Mãe</td>
+                       <td>taaaaa ligado</td>
                     </tr>
                     </tr>
               			<tr>
-                       <td>Data  De Nascimento</td>
-                       <td>Row 2 Cell 3</td>
+                       <td style="text-align: left;" >Data  De Nascimento</td>
+                       <td><%= infoPessoais.DataNascimento %></td>
                     </tr>
                     
                  </table>          
-                <!-- <table>
-                    <% dividas.forEach(divida => {%>
-                       <tr><td><%= divida.nome %></td><td><%= divida.valor %></td></tr>
-                    <%  });%>
-                </table> -->
+               
+             </div>
+            
+             <div style="padding-top: 10px;">
+               <hr>
+                <h3>Detalhamento Dividas</h3>
+                <table border = "1" id="customers" style="padding-top: 30px;">
+                    <tr>
+                      
+                       <th>contrato</th>
+                       <th>Cidade</th>
+                       <th>Valor</th>
+                    </tr>
+                    <% infoDividDividass.forEach(function(divida){ %>
+                      <tr>
+                        <td><%= divida.informante %></td>
+                        <td><%= divida.contrato %></td>
+                        <td><%= divida.cidade %></td>
+                        <td><%= divida.valor %></td>
+                       </tr>
+                     <% }); %>                   
+                 </table>    
              </div>
         </div>
     </body>
