@@ -14,13 +14,40 @@
         <div id="header"> 
             <h2>Annual Report of our Company</h2> 
        </div>
-        <div style="width: 85%; margin: 0 7.5%;">
-            <div style="text-align: center; padding-left: 50px;">            
-                <table>
+        <div style="width: 100%;">
+            <div style="text-align: center;">
+                <table border = "1">
+                    <tr>
+                       <th></th>
+                       <th>Column 2</th>
+                       <th>Column 3</th>
+                    </tr>
+                    <tr>
+                       <td rowspan = "8">Dados do Cliente</td>
+                       <td>Nome</td>
+                       <td>2123123</td>
+                      
+                    </tr>
+                    <tr>
+                       <td>Cpf</td>
+                       <td>Row 2 Cell 3</td>
+                    </tr>
+              			<tr>
+                       <td>Nome da  Mãe</td>
+                       <td>Row 2 Cell 3</td>
+                    </tr>
+                    </tr>
+              			<tr>
+                       <td>Data  De Nascimento</td>
+                       <td>Row 2 Cell 3</td>
+                    </tr>
+                    
+                 </table>          
+                <!-- <table>
                     <% dividas.forEach(divida => {%>
                        <tr><td><%= divida.nome %></td><td><%= divida.valor %></td></tr>
                     <%  });%>
-                </table>
+                </table> -->
              </div>
         </div>
     </body>

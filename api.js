@@ -11,27 +11,9 @@ const app = express();
 
 const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDlkOTg4YTk0MTM4ZjdiNWY4OTdmOTUiLCJsZXZlbCI6MSwiZHVlRGF0ZSI6IjIwMjEtMDYtMTNUMDM6MzI6NTIuNDE0KzAwOjAwIiwicGxhbiI6IjYwOWQ5ODU3OTQxMzhmN2I1Zjg5N2YyNSIsInVzZXJJcCI6IjAuMC4wLjAiLCJpYXQiOjE2MjA5NDEwNjZ9.IWO3hl-nwBzuMl7UtSF5xieCMH-X0jNkxYTxtfF9OkE'
 
-//TODO refatorar 
-//TODO colocar token 
-app.get('/teste', (req, res) => {
-  axios.post('https://api.cyberlookup.org/api/v1/search/score3/cpf',{
-        "cpf": "001.781.091-42"
-       },{
-          headers: {
-            'Authorization': `Basic ${token}` 
-          }})
-      .then(res => {
-        var site = HTMLParser.parse(res.data.consulta);
-        var info = site.querySelectorAll("div[class='row resumo no-padding-left']")
-        let dividas = [];
-        
-        for (var i in info ){
-          let prop = info[i].querySelector("strong").innerHTML.trim();
-          let value =  info[i].querySelectorAll("div[class='pwl-col-xs-4 text-center']")[2].innerHTML.trim();
-          dividas.push({nome:prop,valor:value});
-        }
 
-        ejs.renderFile(path.join(__dirname, 'template.ejs'), {dividas: dividas}, (err, data) => {
+function geraPDF(infoPessoais){
+      ejs.renderFile(path.join(__dirname, 'template.ejs'), {infoPessoais: infoPessoais}, (err, data) => {
           if (err) {
                 console.log("🚀 ~ file: api.js ~ line 36 ~ ejs.renderFile ~ err", err)
                 //res.send(err);
@@ -56,6 +38,53 @@ app.get('/teste', (req, res) => {
               });
           }
       });
+}
+
+function retornaDividas(){
+        // var site = HTMLParser.parse(res.data.consulta);
+        // var info = site.querySelectorAll("div[class='row resumo no-padding-left']")
+        // let dividas = [];
+        
+        // for (var i in info ){
+        //   let prop = info[i].querySelector("strong").innerHTML.trim();
+        //   let value =  info[i].querySelectorAll("div[class='pwl-col-xs-4 text-center']")[2].innerHTML.trim();
+        //   dividas.push({nome:prop,valor:value});
+        // }
+        return "";
+}
+function trataHtml(html){
+  return html.replace("\r\n"," ").trim();
+}
+
+function RetornaDadosPessoa(infoPessoa){
+  let dados = [];
+  for(let i in infoPessoa){
+    try {
+      let propriedade =  trataHtml(infoPessoa[i].querySelector("strong").innerHTML)
+      let valor = infoPessoa[i].innerHTML.split("\r\n")[5].trim();
+      dados.push({propriedade : propriedade,valor : valor})
+    } catch(e){
+
+    }
+ 
+  }
+ return dados;
+}
+
+app.get('/teste', (req, res) => {
+  axios.post('https://api.cyberlookup.org/api/v1/search/score3/cpf',{
+        "cpf": "001.781.091-42"
+       },{
+          headers: {
+            'Authorization': `Basic ${token}` 
+          }})
+      .then(res => {
+        var site = HTMLParser.parse(res.data.consulta);
+        let infoPessoa = site.querySelectorAll("div[class='pwl-col-xs-8']") 
+
+        let dadosPessoa = RetornaDadosPessoa(infoPessoa);
+
+        console.log(dadosPessoa);
       })
 });
 
