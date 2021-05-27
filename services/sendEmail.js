@@ -12,13 +12,13 @@ const transporter = nodemailer.createTransport({
   });
   
   var mailOptions = {
-    from: 'testeasjdasijd123@gmail.com',
+    from: 'consultapositiva@conseguibaixar.com.br',
     to: 'rojefferson3@gmail.com',
-    subject: 'Sending Email using Node.js[nodemailer]',
-    text: 'That was easy!'
+    subject: 'foiiiiiiiiiiiiiiiide.js[nodemailer]',
+    text: 'foiiiiiiiiii!'
   };
 
-const sendEmail = () => {
+ sendEmail = function(){
         transporter.sendMail(mailOptions, function(error, info){
         if (error) {
         console.log(error);
@@ -29,4 +29,4 @@ const sendEmail = () => {
   }
 
 
-exports.sendEmail= sendEmail;
+exports.sendEmail = sendEmail;

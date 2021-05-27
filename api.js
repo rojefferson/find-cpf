@@ -6,12 +6,11 @@ const  axios = require('axios');
 
 const app = express();
 
-const sendEmail =  require("./services/sendEmail");
+const mail =  require("./services/sendEmail").sendEmail;
 
 
 app.get('/teste', (req, res) => {
-
-  sendEmail(); 
+  mail();
   res.send("foi");
 });
 
