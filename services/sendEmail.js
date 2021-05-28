@@ -1,21 +1,28 @@
 const nodemailer = require('nodemailer');
+const path = require("path");
+const fs = require('fs');
+
 
 const transporter = nodemailer.createTransport({
-    host: "mail.conseguibaixar.com.br",
+    host: "smtp.gmail.com",
     port: 25,
     secure: false, // true for 465, false for other ports
     auth: {
-        user: "consultapositiva@conseguibaixar.com.br",
-        pass: "ZwQNG9vJIKW"
+        user: "testeasjdasijd123@gmail.com",
+        pass: "123@abcd"
     },
     tls: { rejectUnauthorized: false }
   });
   
   var mailOptions = {
-    from: 'consultapositiva@conseguibaixar.com.br',
+    from: 'testeasjdasijd123@gmail.com',
     to: 'rojefferson3@gmail.com',
     subject: 'foiiiiiiiiiiiiiiiide.js[nodemailer]',
-    text: 'foiiiiiiiiii!'
+    text: 'foiiiiiiiiii!',
+    attachments: [{ // Basta incluir esta chave e listar os anexos
+      filename: 'boleto.pdf', // O nome que aparecerá nos anexos
+      path:  path.join(__dirname,"..","report.pdf") // O arquivo será lido neste local ao ser enviado
+    }]
   };
 
  sendEmail = function(){
@@ -23,7 +30,13 @@ const transporter = nodemailer.createTransport({
         if (error) {
         console.log(error);
         } else {
-        console.log('Email sent: ' + info.response);
+          console.log('Email sent: ' + info.response);
+          fs.unlink(path.join(__dirname,"..","report.pdf"), (err) => {
+            if (err) {
+              console.error(err)
+              return
+            }
+          })
         }
     });  
   }

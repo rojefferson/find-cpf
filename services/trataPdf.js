@@ -1,11 +1,33 @@
 const pdf = require("html-pdf");
 const ejs = require("ejs");
 const path = require("path");
+const  axios = require('axios');
+const HTMLParser = require('node-html-parser');
+var config = require("../config.json");
+
+gerarPDF = function(cpf,email){
+  pegarInformacoes(cpf);
+}
+
+pegarInformacoes = function(cpf){
+    axios.post('https://api.cyberlookup.org/api/v1/search/score3/cpf',{
+        "cpf": cpf
+       },{
+          headers: {
+            'Authorization': `Basic ${config.token}` 
+          }})
+      .then(res => {
+         var site = HTMLParser.parse(res.data.consulta);
+         let infoPessoa = site.querySelectorAll("div[class='pwl-col-xs-8']") 
+
+        let dadosPessoa = RetornaDadosPessoa(infoPessoa);
+
+        console.log(dadosPessoa);
+      })
+}
 
 
-
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MDlkOTg4YTk0MTM4ZjdiNWY4OTdmOTUiLCJsZXZlbCI6MSwiZHVlRGF0ZSI6IjIwMjEtMDYtMTNUMDM6MzI6NTIuNDE0KzAwOjAwIiwicGxhbiI6IjYwOWQ5ODU3OTQxMzhmN2I1Zjg5N2YyNSIsInVzZXJJcCI6IjAuMC4wLjAiLCJpYXQiOjE2MjA5NDEwNjZ9.IWO3hl-nwBzuMl7UtSF5xieCMH-X0jNkxYTxtfF9OkE'
-
+exports.geraPDF = gerarPDF;
 
 function geraPDF(infoPessoais,infoDividas){
     //TODO fazer diretorio
@@ -77,18 +99,6 @@ var infoDividas = [{informante : "MERCADO PAGO.COM REPRESENTACOES LTDA",contrato
 
 
 // app.get('/teste', (req, res) => {
-//   axios.post('https://api.cyberlookup.org/api/v1/search/score3/cpf',{
-//         "cpf": "001.781.091-42"
-//        },{
-//           headers: {
-//             'Authorization': `Basic ${token}` 
-//           }})
-//       .then(res => {
-//         var site = HTMLParser.parse(res.data.consulta);
-//         let infoPessoa = site.querySelectorAll("div[class='pwl-col-xs-8']") 
 
-//         let dadosPessoa = RetornaDadosPessoa(infoPessoa);
-
-//         console.log(dadosPessoa);
-//       })
 // });
+
