@@ -1,17 +1,20 @@
 const express = require('express');
-const  axios = require('axios');
-// const HTMLParser = require('node-html-parser');
 
-
-
-const app = express();
+// 
 
 const mail =  require("./services/sendEmail").sendEmail;
+const geraPDF =  require("./services/trataPdf").geraPDF;
 
+const app = express();
+app.use(express.json())
 
-app.get('/teste', (req, res) => {
-  mail();
-  res.send("foi");
+function formatarResp(data){
+  return {Status : "SUCCESS",Data: data};
+}
+
+app.post('/GeneratePDF', (req, res) => {
+  geraPDF(req.body.cpf,req.body.email);
+  res.send(formatarResp("Dados enviados para o e-mail"));
 });
 
 
