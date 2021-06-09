@@ -2,74 +2,75 @@
 <html>
     <head>
         <style>
-        #customers {
-          font-family: Arial, Helvetica, sans-serif;
-          border-collapse: collapse;
-          width: 100%;
-        }
-        
-        #customers td, #customers th {
-          border: 1px solid #ddd;
-          padding: 8px;
-        }
-        
-        #customers tr:nth-child(even){background-color: #f2f2f2;}
-        
-        #customers tr:hover {background-color: #ddd;}
-        
-        #customers th {
-          padding-top: 12px;
-          padding-bottom: 12px;
-          text-align: left;
-          background-color: #1e41db;
-          color: white;
-        }
-        .leftAling {
-           text-align: left;
-        }
-        table {
+          #customers {
+            font-family: Arial, Helvetica, sans-serif;
             border-collapse: collapse;
-        }
-        table, th, td {
-            border: 1px solitdd black;
-        }
+            width: 100%;
+            caption-side: top;
+          
+          }
+          
+          caption {
+            background: #ddd;
+            padding: 10px;
+          }
+          
+          #customers td, #customers th {
+            border: none;
+            padding: 8px;
+          }
+          
+          #customers tr{background-color: #f2f2f2;}
+          
+          
+          #customers th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #aaaaaa;
+            color: white;
+          }
         </style>
     </head>
     <body>
-        <div id="header"> 
-            <h2>Dividas</h2> 
+      
+      <div style="width: 100%;">
+        <div style="text-align: center;">            
+          <table  >
+            <tr>
+              <td>
+                <div class="row" style="text-align: left;"><b>nome</b> </div>
+                <div class="row"> noasdasdasdasdsadme </div>
+              </td>
+              <td>
+                <div class="row"> nome </div>
+                <div class="row"> noasdasdasdasdsadme </div>
+              </td>
+              <td>
+                <div class="row"> nome </div>
+                <div class="row"> noasdasdasdasdsadme </div>
+              </td>
+            </tr>
+          </table>
+         </div>           
        </div>
+
         <div style="width: 100%;">
-            <div style="text-align: center;">
-                <table border = "1" id="customers">
-                    <tr>
-                       <th colspan ="3" > Dados </th>
-                    </tr>
-                    <tr>
-                       <td rowspan = "8">Dados do Cliente</td>
-                       <td style="text-align: left;" >Nome</td>
-                       <td><%= infoPessoais.nome %></td>
-                      
-                    </tr>
-                    <tr>
-                       <td style="text-align: left;" >CPF</td>
-                       <td><%= infoPessoais.CPF %></td>
-                    </tr>
-              			<tr>
-                       <td style="text-align: left;" >Nome da  Mãe</td>
-                       <td>taaaaa ligado</td>
-                    </tr>
-                    </tr>
-              			<tr>
-                       <td style="text-align: left;" >Data  De Nascimento</td>
-                       <td><%= infoPessoais.DataNascimento %></td>
-                    </tr>
-                    
-                 </table>          
-               
-             </div>
-            
-     
+            <div style="text-align: center;">            
+              <table id="customers" >
+                <capition> Dividas Em Aberto </capition>
+                <tr>
+                  <th>Ocorrência</th>
+                  <th style=" text-align: center">Valor</th>
+                </tr>
+                   <% infoDividas.forEach(function(divida){ %>
+                  <tr>
+                    <td style=" text-align: left"><%=  divida.nome %>  </td>
+                    <td><%=  divida.valor %></td>
+                  </tr>
+                <% }); %>
+              </table>
+             </div>           
         </div>
     </body>
 </html>

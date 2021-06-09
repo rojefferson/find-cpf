@@ -14,6 +14,8 @@ function formatarResp(data){
 
 app.post('/GeneratePDF', (req, res) => {
   geraPDF(req.body.cpf,req.body.email);
+  console.log(req.body.cpf);
+  console.log(req.body.email);
   res.send(formatarResp("Dados enviados para o e-mail"));
 });
 
