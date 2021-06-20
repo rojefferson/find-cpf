@@ -2,8 +2,7 @@ const express = require('express');
 
 // 
 
-const mail =  require("./services/sendEmail").sendEmail;
-const geraPDF =  require("./services/trataPdf").geraPDF;
+const gerarPDF =  require("./services/trataPdf").gerarPDF;
 
 const app = express();
 app.use(express.json())
@@ -13,12 +12,13 @@ function formatarResp(data){
 }
 
 app.post('/GeneratePDF', (req, res) => {
-  geraPDF(req.body.cpf,req.body.email);
-  console.log(req.body.cpf);
-  console.log(req.body.email);
+  gerarPDF(req.body.cpf,req.body.email);
   res.send(formatarResp("Dados enviados para o e-mail"));
 });
 
+app.post('/teste', (req, res) => {
+  res.send(formatarResp("passou!!"));
+});
 
 
-app.listen(3000, () => console.log('Example app is listening on port 3000.'));
+app.listen(3000, () => console.log('rodando porta 3000.'));

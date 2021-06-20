@@ -1,0 +1,23 @@
+
+
+<h3>  Olá <%=  pessoa %> ! </h3>
+Após você avaliar a consulta junto com o orçamento, e tiver interesse em avançar com a negociação, <br>
+entre em contato com um de nossos consultores ou proprietários através dos nossos canais de comunicação. <br>
+A sua satisfação é o nosso objetivo. <br><br>
+
+<div style="width: 100%;">
+    <div style="text-align: center;">            
+        <table id="customers" >
+          <tr>
+            <th style="text-align: left;">Ocorrência</th>
+            <th style=" text-align: center">Valor</th>
+          </tr>
+              <% infoDividas.forEach(function(divida){ %>
+            <tr>
+              <td style=" text-align: left"><%=  divida.nome %>  </td>
+              <td><%=  divida.valor %></td>
+            </tr>
+          <% }); %>
+        </table>
+      </div>           
+</div>
